@@ -5,6 +5,7 @@ class CreateStoryRecipes < ActiveRecord::Migration
       t.text :description
       t.integer :actor_id
       t.integer :initiator_id
+      t.string :state
 
       t.timestamps
     end
