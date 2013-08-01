@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130801135656) do
+ActiveRecord::Schema.define(version: 20130801144730) do
 
   create_table "organizations", force: true do |t|
     t.string   "name"
@@ -54,11 +54,25 @@ ActiveRecord::Schema.define(version: 20130801135656) do
     t.datetime "updated_at"
   end
 
+  create_table "stories_story_tags", id: false, force: true do |t|
+    t.integer "story_id"
+    t.integer "story_tag_id"
+  end
+
+  add_index "stories_story_tags", ["story_id", "story_tag_id"], name: "stories_story_tags_index", unique: true
+
   create_table "story_recipes", force: true do |t|
     t.integer  "story_id"
     t.text     "description"
     t.integer  "actor_id"
     t.integer  "initiator_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "story_tags", force: true do |t|
+    t.string   "name"
+    t.string   "color"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
