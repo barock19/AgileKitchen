@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 20130801135656) do
     t.text     "long_desc"
     t.integer  "initiator_id"
     t.integer  "actor_id"
+    t.integer  "velocity"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

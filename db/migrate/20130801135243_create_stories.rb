@@ -6,6 +6,7 @@ class CreateStories < ActiveRecord::Migration
       t.text :long_desc
       t.integer :initiator_id
       t.integer :actor_id
+      t.integer :velocity
 
       t.timestamps
     end
