@@ -1,5 +1,8 @@
 require 'spec_helper'
 
 describe Project do
-  pending "add some examples to (or delete) #{__FILE__}"
+	context "when create new Project" do
+		subject{Project.new}
+		it_behaves_like "invalid_new_record", [:initiator_id]
+	end
 end

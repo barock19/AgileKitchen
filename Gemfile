@@ -16,6 +16,7 @@ group :doc do
   gem 'sdoc', require: false
 end
 group :test , :development do
+	gem "rails-erd"
 	gem 'rr'
 	gem 'database_cleaner', :git => 'https://github.com/barock19/database_cleaner.git'
 	gem 'factory_girl_rails'
