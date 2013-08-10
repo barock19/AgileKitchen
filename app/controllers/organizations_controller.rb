@@ -1,0 +1,2 @@
+class OrganizationsController <BaseController
+end

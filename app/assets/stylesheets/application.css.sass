@@ -8,6 +8,25 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
+ *= require bootstrap.min
+ *= require font-awesome/css/font-awesome.css
  *= require_self
- *= require_tree .
+ *= require misc
  */
+.user-pane
+	ul.nav.nav-pills
+		>li 
+			>span 
+				display: inline-block
+				margin-left: 10px
+.head
+	// height: 40px
+	h2.brand
+		margin: 0px
+		font-size: 20px
+		line-height: 20px
+		i
+			font-size: 70%
+#root-component
+	min-height: 300px
+

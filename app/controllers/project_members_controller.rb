@@ -1,0 +1,3 @@
+class ProjectMembersController < BaseController
+	
+end

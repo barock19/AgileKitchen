@@ -1,7 +1,16 @@
 class Project < ActiveRecord::Base
-  has_and_belongs_to_many :users
-  belongs_to :organization
-  belongs_to :initiator, :class_name => "User"
-  validates :initiator_id, presence: true
-  validates_associated :initiator
+	belongs_to :organization
+	belongs_to :initiator, :class_name => "User"
+	has_many :project_roles
+	has_many :project_members
+	has_many :members, :through => :project_members
+	validates :initiator_id, presence: {:in => true, :message => "project must be belongs to %{attribute}"}
+	validates_associated :project_members
+	validates :name, :uniqueness => {:scope => :initiator_id,
+	:message => ->(error, attributes){
+	 "#{attributes[:value]} already taken" 
+	 }}
+	def declare_project_role
+		# scrum_master, #product_owner, #developer, #tester
+	end
 end

@@ -1,0 +1,4 @@
+=content_for(:top_right_menu) do
+	-if current_user
+		=render 'top_right_user_pane'
+=render :file => 'layouts/global'

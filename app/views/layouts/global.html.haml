@@ -1,0 +1,56 @@
+!!! HTML
+%html
+	%head
+		%title=page_title
+		= stylesheet_link_tag :application, media: "all"
+		= javascript_include_tag "application"	
+		= csrf_meta_tags
+	%body{:class => "#{body_idif}"}
+		.container.head
+			.row
+				.col-lg-6
+					%h2.brand
+						="Agile<span style=\"color : #929598\">Kitchen</span>".html_safe
+						%br
+						%small 
+							%i lets make some good foods
+				.col-lg-6
+					-if block_reserved?(:top_right_menu)
+						=yield :top_right_menu
+					.clearfix
+			%hr.top-off
+		.container.component
+			.row
+				.col-lg-12
+					-unless flash[:error].blank?
+						.alert.alert-danger
+							%p=flash[:error]
+					-unless flash[:alert].blank?
+						.alert.alert-warning
+							%p=flash[:alert]
+					-unless flash[:success].blank?
+						.alert.alert-success
+							%p=flash[:success]
+					-unless flash[:info].blank?
+						.alert.alert-info
+							%p=flash[:info]
+					-unless flash[:warning].blank?
+						.alert.alert-danger
+							%p=flash[:warning]														
+			.row
+				-if block_reserved?(:sidebar)
+					.col-lg-3
+						/ .well
+						=yield :sidebar
+				#root-component{:class => "#{ block_reserved?(:sidebar)? 'col-lg-9' : 'col-lg-12' }"}
+					/ .well
+					=yield
+		.container.foot
+			.row
+				.col-lg-12
+					%hr.top-off
+					%small 
+						© 2013 AgileKitchen,
+						%i "lets make some good foods"
+		.bottom-js{:style => "display:none"}
+			=yield :bottom_js

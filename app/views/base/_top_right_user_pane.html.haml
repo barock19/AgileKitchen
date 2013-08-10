@@ -1,0 +1,14 @@
+.pull-right
+	.user-pane
+		%ul.nav.nav-pills
+			%li
+				%span
+					=image_tag current_user.gravatar_url(20), :class => 'img-circle'	
+					%b=current_user.username			
+			%li
+				%span
+					%i.icon.icon-cog
+			%li
+				%span
+					%a{:href => destroy_user_session_path, :title => 'Logout', :data =>{:method => :delete, :toggle => 'tooltip', "original-title" => "logout"}}
+						%i.icon.icon-signout		

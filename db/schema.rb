@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130805164918) do
+ActiveRecord::Schema.define(version: 20130810091302) do
 
   create_table "organizations", force: true do |t|
     t.string   "name"
@@ -22,12 +22,22 @@ ActiveRecord::Schema.define(version: 20130805164918) do
     t.integer  "initiator_id"
   end
 
-  create_table "organizations_users", id: false, force: true do |t|
-    t.integer "organization_id"
-    t.integer "user_id"
+  create_table "project_members", force: true do |t|
+    t.integer  "project_id"
+    t.integer  "user_id"
+    t.integer  "role_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  add_index "organizations_users", ["organization_id", "user_id"], name: "organizations_users_index", unique: true
+  create_table "project_roles", force: true do |t|
+    t.integer  "project_id"
+    t.string   "name"
+    t.text     "regulation"
+    t.boolean  "custom"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "project_sprints", force: true do |t|
     t.datetime "start_at"
@@ -46,13 +56,6 @@ ActiveRecord::Schema.define(version: 20130805164918) do
     t.datetime "updated_at"
     t.integer  "initiator_id"
   end
-
-  create_table "projects_users", id: false, force: true do |t|
-    t.integer "project_id"
-    t.integer "user_id"
-  end
-
-  add_index "projects_users", ["project_id", "user_id"], name: "projects_users_index", unique: true
 
   create_table "stories", force: true do |t|
     t.integer  "project_id"
@@ -111,6 +114,7 @@ ActiveRecord::Schema.define(version: 20130805164918) do
     t.string   "bio"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "username"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
