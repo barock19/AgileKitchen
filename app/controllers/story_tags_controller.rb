@@ -14,6 +14,10 @@ class StoryTagsController <BaseController
 	def create
 	end
 
+	def index
+		
+	end
+
 	private
 	def story_tag_params
 		params.require(:story_tag).permit(:name, :color)

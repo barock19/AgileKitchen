@@ -18,15 +18,18 @@ AgileKitchen::Application.routes.draw do
 	scope :api do
 		resources :projects , :concerns => :projectable
 		resources :users
-		resources :sprints, :story_tags , :stories, :project_members
-		resources :story_recipeable , :concerns => :story_recipeable
+		resources :sprints, :story_tags , :project_members
+		resources :stories, :concerns => :storizeable
+		resources :story_recipes , :concerns => :story_recipeable
 	end
 	# -------------------><----------------------
 	# B
 	resources :projects, :concerns => :projectable
 	resources :users
 	resources :sprints, :story_tags , :stories, :project_members
-	resources :story_recipeable , :concerns => :story_recipeable
+	resources :stories, :concerns => :storizeable
+	resources :story_recipes, :concerns => :story_recipeable
+
 	# end keep it sync
 	# -------------------------------------------
 

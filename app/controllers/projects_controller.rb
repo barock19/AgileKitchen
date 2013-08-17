@@ -1,5 +1,5 @@
 class ProjectsController <BaseController
-	before_filter :only => [:show, :edit, :destroy] 
+	before_action :define_project, :only => [:show, :edit, :destroy] 
 	def index
 		@projects = current_user.projects
 		good_response @projects
@@ -29,7 +29,7 @@ class ProjectsController <BaseController
 
 	private
 	def define_project
-		@project = Project.find_by_nick params[:id]
+		@project = Project.find params[:id]
 	end
 	def project_params
 		params.require(:project).permit(:description, :name)

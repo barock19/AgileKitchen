@@ -11,4 +11,7 @@ class BaseController <ApplicationController
 	rescue_from ActionController::UnknownFormat do |ex|
 		bad_response ex.message 
 	end
+	rescue_from ActiveRecord::RecordNotFound do |ex|
+		bad_response ex.message, {}, 404
+	end
 end

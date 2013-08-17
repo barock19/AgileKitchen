@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
 
   has_many :project_members
   has_many :projects, :through => :project_members
+  has_many :stories, :through => :projects
   
   def gravatar_url size = false
   	"http://www.gravatar.com/avatar.php?gravatar_id="+
