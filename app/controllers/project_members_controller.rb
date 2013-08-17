@@ -5,6 +5,12 @@ class ProjectMembersController < BaseController
 	end
 
 	def create
+		@project_member = ProjectMember.new(project_member_params.merge(:project_id => params[:project_id]))
+		if @project_member.save
+			good_response @project_member
+		else
+			bad_response @project_member.errors
+		end
 	end
 
 	def edit
@@ -13,13 +19,14 @@ class ProjectMembersController < BaseController
 	def show
 	end
 
-	def create
-	end
-
 	def update
 	end
 	private
 	def define_project_members
 		@project_members = ProjectMember.where(:project_id => params[:project_id])
+	end
+
+	def project_member_params
+		params.require(:project_member).permit(:user_id)
 	end
 end
