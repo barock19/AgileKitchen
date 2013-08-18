@@ -15,7 +15,7 @@ class Ability
 		can :show, Project do |project|
 			project.members.where(:id => [user.id]).count > 0			
 		end
-		can [:show], [Story, StoryRecipe]
+		can [:show,:index], [Story, StoryRecipe]
 
 		# update - destroy
 		can [:update, :destroy], [Story, StoryRecipe], :actor_id => user.id
