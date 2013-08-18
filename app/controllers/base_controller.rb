@@ -14,4 +14,7 @@ class BaseController <ApplicationController
 	rescue_from ActiveRecord::RecordNotFound do |ex|
 		bad_response ex.message, {}, 404
 	end
+	rescue_from CanCan::AccessDenied do |ex|
+		bad_response ex.message, {}, 401
+ 	end
 end
