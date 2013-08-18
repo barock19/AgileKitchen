@@ -3,11 +3,11 @@ AgileKitchen::Application.routes.draw do
 	member_action 		= [:show, :edit, :destroy]
 	collection_action = [:create, :index, :new]
 	concern(:story_recipeable){member{put :move}}
-	concern(:storizeable){resources(:story_recipes, :only => collection_action)}
+	concern(:storizeable){resources(:story_recipes, :only => collection_action + member_action)}
 	concern :projectable do
-		resources :sprints, :story_tags , :only => collection_action
-		resources :project_members, :path => 'members', :only => collection_action
-		resources :stories, :concerns => :storizeable,  :only => collection_action
+		resources :sprints, :story_tags , :only => collection_action + member_action
+		resources :project_members, :path => 'members', :only => collection_action + member_action
+		resources :stories, :concerns => :storizeable,  :only => collection_action + member_action
 	end
 
 	# LIGHT GREEN!! All tunnels opened (route started here)
