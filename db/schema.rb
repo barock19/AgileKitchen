@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130818074912) do
+ActiveRecord::Schema.define(version: 20130818095630) do
 
   create_table "attachments", force: true do |t|
     t.string   "image_url"
@@ -65,6 +65,18 @@ ActiveRecord::Schema.define(version: 20130818074912) do
     t.integer  "initiator_id"
   end
 
+  create_table "sprints", force: true do |t|
+    t.datetime "start_at"
+    t.datetime "end_at"
+    t.string   "title"
+    t.integer  "initiator_id"
+    t.text     "description"
+    t.integer  "project_id"
+    t.boolean  "active"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "stories", force: true do |t|
     t.integer  "project_id"
     t.string   "short_desc"
@@ -74,6 +86,8 @@ ActiveRecord::Schema.define(version: 20130818074912) do
     t.integer  "velocity"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "sprint_id"
+    t.integer  "priority"
   end
 
   create_table "stories_story_tags", id: false, force: true do |t|
