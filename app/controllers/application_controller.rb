@@ -6,6 +6,9 @@ class ApplicationController < ActionController::Base
   def root_page
   	render :text => "root_page"
   end
+  def current_ability
+    @current_ability ||= Ability.new current_user
+  end
   private 
   def json_request?
   	!request.content_mime_type.nil?
