@@ -21,6 +21,7 @@ AgileKitchen::Application.routes.draw do
 		resources :sprints, :story_tags , :project_members
 		resources :stories, :concerns => :storizeable
 		resources :story_recipes , :concerns => :story_recipeable
+		resources :attachments
 	end
 	# -------------------><----------------------
 	# B
@@ -29,6 +30,7 @@ AgileKitchen::Application.routes.draw do
 	resources :sprints, :story_tags , :stories, :project_members
 	resources :stories, :concerns => :storizeable
 	resources :story_recipes, :concerns => :story_recipeable
+	resources :attachments
 
 	# end keep it sync
 	# -------------------------------------------

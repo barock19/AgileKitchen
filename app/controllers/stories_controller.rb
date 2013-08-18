@@ -7,7 +7,7 @@ class StoriesController <BaseController
 	load_and_authorize_resource :story , :through => :project
 
 	def show
-		good_response @story
+		good_response @story.as_json(:include => [:attachments, :project], :except => [:id], :methods => [:asuh])
 	end
 	
 	def edit
