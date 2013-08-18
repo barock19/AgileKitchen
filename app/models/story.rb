@@ -4,5 +4,9 @@ class Story < ActiveRecord::Base
   belongs_to :initiator, :class_name => 'User'
   belongs_to :actor, :class_name => 'User'
   validates :long_desc, :velocity, :project_id, :initiator_id, :presence => true
+  has_many :attachments, :as => :resourceable 
 
+  def asuh
+  	"Asuh"
+  end
 end

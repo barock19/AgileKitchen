@@ -24,8 +24,8 @@ module AgileKitchen
 		config.action_mailer.smtp_settings = {
 		  :address              => "smtp.gmail.com",
 		  :port                 => 587,
-		  :user_name            => 'zidmubarock@gmail.com',
-		  :password             => 'alzid4evergoogle',
+		  :user_name            => 'cak.azharr@gmail.com',
+		  :password             => 'mute436fang4378',
 		  :authentication       => 'plain',
 		  :enable_starttls_auto => true  }
 	end

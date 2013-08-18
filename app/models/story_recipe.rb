@@ -3,6 +3,7 @@ class StoryRecipe < ActiveRecord::Base
   belongs_to :initiator, :class_name => 'User', :foreign_key => 'initiator_id'
   belongs_to :actor, :class_name => 'User', :foreign_key => 'actor_id'
   belongs_to :story
+  has_many :attachments, :as => :resourceable 
   has_one :project, :through => :story
   validates :description, :initiator_id, :story_id , :presence => true
 end
