@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130818074912) do
+ActiveRecord::Schema.define(version: 20130818094411) do
 
   create_table "attachments", force: true do |t|
     t.string   "image_url"
@@ -63,6 +63,18 @@ ActiveRecord::Schema.define(version: 20130818074912) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "initiator_id"
+  end
+
+  create_table "sprints", force: true do |t|
+    t.datetime "start_at"
+    t.datetime "end_at"
+    t.string   "title"
+    t.integer  "initiator_id"
+    t.text     "description"
+    t.integer  "project_id"
+    t.boolean  "active"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "stories", force: true do |t|
