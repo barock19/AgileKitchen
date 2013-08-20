@@ -5,13 +5,15 @@ class Sprint < ActiveRecord::Base
 	has_many :stories
 	validate :check_current_active_project_sprint
 	after_create :add_id_sprint_to_story
-
+	validates :project_id, :presence => true
 	after_initialize :define_default_active , :if => "new_record?"
 
 	def define_default_active
 		self.active = true
 	end
-
+	def total_velocity 
+		stories.sum(:velocity)
+	end
 	def check_current_active_project_sprint
 		errors.add :project_id, "There is a current active sprint" if Sprint.where(:project_id => project_id, :active => true).count > 0
 	end
