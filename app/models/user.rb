@@ -6,9 +6,11 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :lockable, :confirmable
 
+  has_many :initiated_sprints, :class_name => 'Sprint', :foreign_key => 'initiator_id'
   has_many :project_members
   has_many :projects, :through => :project_members
   has_many :stories, :through => :projects
+  has_many :sprints, :through => :projects
   has_many :owned_projects, :class_name => "Project", :foreign_key => :initiator_id
   
   def gravatar_url size = false

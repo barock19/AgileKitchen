@@ -3,11 +3,20 @@ class Sprint < ActiveRecord::Base
 	belongs_to :project
 	belongs_to :initiator , :class_name => "User", :foreign_key => "initiator_id"
 	has_many :stories
+	has_many :story_recipes, :through => :stories
 	validate :check_current_active_project_sprint
-	after_create :add_id_sprint_to_story
 	validates :project_id, :presence => true
+	after_create :add_id_sprint_to_story
 	after_initialize :define_default_active , :if => "new_record?"
 
+	scope :contributed, ->(user_id){
+		_recipe = StoryRecipe.arel_table
+		_story  = Story.arel_table
+
+		joins(:story_recipes).where( \
+			_recipe[:initiator_id].eq(user_id)
+		)
+	}
 	def define_default_active
 		self.active = true
 	end
@@ -33,3 +42,7 @@ class Sprint < ActiveRecord::Base
 
 	end
 end
+
+try{|r|
+	params[:actord_id].nil? ? r : r.where(:actord_id => params[:id])
+}
