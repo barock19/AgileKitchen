@@ -13,9 +13,9 @@ class Sprint < ActiveRecord::Base
 		_recipe = StoryRecipe.arel_table
 		_story  = Story.arel_table
 
-		joins(:story_recipes).where( \
-			_recipe[:initiator_id].eq(user_id)
-		)
+		joins(:story_recipes).where \
+			_recipe[:initiator_id].eq(user_id).or(_story[:initiator_id].eq(user_id)).or(_story[:actor_id].eq(user_id))
+		
 	}
 	def define_default_active
 		self.active = true
@@ -42,7 +42,3 @@ class Sprint < ActiveRecord::Base
 
 	end
 end
-
-try{|r|
-	params[:actord_id].nil? ? r : r.where(:actord_id => params[:id])
-}
