@@ -12,10 +12,17 @@ class Sprint < ActiveRecord::Base
 	scope :contributed, ->(user_id){
 		_recipe = StoryRecipe.arel_table
 		_story  = Story.arel_table
-
-		joins(:story_recipes).where \
-			_recipe[:initiator_id].eq(user_id).or(_story[:initiator_id].eq(user_id)).or(_story[:actor_id].eq(user_id))
+		_user		= User.arel_table
+		_sprint = Sprint.arel_table
+		complex_join = _sprint
+			.join(_recipe, Arel::Nodes::OuterJoin)
+			.on(_recipe[:story_id].eq(_story[:id]))
+			.join(_story, Arel::Nodes::OuterJoin)
+			.on(_story[:sprint_id].eq(_sprint[:id]))
+			.join_sources
 		
+		joins(complex_join).any_of \
+			StoryRecipe.where(:initiator_id => user_id),  Story.where(:initiator_id => user_id),  Story.where(:actor_id => user_id) 
 	}
 	def define_default_active
 		self.active = true

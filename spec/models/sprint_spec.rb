@@ -13,7 +13,10 @@ describe Sprint do
 	}
 	before(:each){
 		5.times do
-			Story.create(:initiator_id => user.id, :short_desc => "test", :long_desc => "teeeesst", :project_id => project.id, :velocity => 8)
+			s = Story.create(:initiator_id => user.id, :short_desc => "test", :long_desc => "teeeesst", :project_id => project.id, :velocity => 8)
+			3.times do 
+				StoryRecipe.create(:initiator_id => user.id, :description => "adsasdasda")
+			end
 		end
 	}
 	context "when created" do
@@ -28,6 +31,13 @@ describe Sprint do
 				@sprint.save
 				@sprint.total_velocity.should eq(24)
 			end
+			context "when search contributed" do
+				it "should show some" do
+					puts Sprint.contributed(user.id).to_sql
+					
+					Sprint.contributed(user.id).include?(@sprint).should be_true
+				end		
+			end			
 		end
 		context "when there ia active sprint in project targeted" do
 			before(:each) do
